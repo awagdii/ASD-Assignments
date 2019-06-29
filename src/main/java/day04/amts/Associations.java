@@ -1,7 +1,6 @@
 package day04.amts;
 
 import association.framework.*;
-import framework.*;
 
 public class Associations {
     static public Association.Multiplicity ZeroOrMore = Association.Multiplicity.ZeroOrMore;
