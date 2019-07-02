@@ -1,41 +1,64 @@
 package day06.propagation;
 
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-class SalesConsultant extends DomainObject
-{
-	private static ObjectManager manager = new ObjectManager();	
-	public static ObjectManager getManager() { return manager; }	
+class SalesConsultant extends DomainObject {
+    private static ObjectManager manager = new ObjectManager();
 
-	private String name;
-	private String phoneNumber;
-	
-	private CompTerms compTerms;
-	private List<Deal> deals = new ArrayList<Deal>();
+    public static ObjectManager getManager() {
+        return manager;
+    }
 
-	public SalesConsultant(String nm, String ph)
-	{
-		manager.addObject(this);
+    private String name;
+    private String phoneNumber;
 
-		name = nm;
-		phoneNumber = ph;
-	}
-	
-	public String getName() {return name;}
-	public void setName(String str) {name = str;}
+    private CompTerms compTerms;
+    private List<Deal> deals = new ArrayList<Deal>();
 
-	public String getPhoneNumber() {return phoneNumber;}
-	public void setPhoneNumber(String pn) {phoneNumber = pn;}
+    public SalesConsultant(String nm, String ph) {
+        manager.addObject(this);
 
-	public void addDeal(Deal deal) { deals.add(deal); }
-	public List<Deal> getDeals() { return deals; }
+        name = nm;
+        phoneNumber = ph;
+    }
 
-	public CompTerms getCompTerms() {return compTerms;}
-	public void setCompTerms(CompTerms compTerms)
-	{
-		if (this.compTerms != null)
-			compTerms.setPrevious(this.compTerms);
-		this.compTerms = compTerms;
-	}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String str) {
+        name = str;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String pn) {
+        phoneNumber = pn;
+    }
+
+    public void addDeal(Deal deal) {
+        deals.add(deal);
+    }
+
+    public List<Deal> getDeals() {
+        return deals;
+    }
+
+    public CompTerms getCompTerms() {
+        return compTerms;
+    }
+
+    public void setCompTerms(CompTerms compTerms) {
+        if (this.compTerms != null)
+            compTerms.setPrevious(this.compTerms);
+        this.compTerms = compTerms;
+    }
+
+    public double getProfitFor(Period period) {
+        return deals.stream().mapToDouble(Deal::getProfitFor).sum();
+    }
 }

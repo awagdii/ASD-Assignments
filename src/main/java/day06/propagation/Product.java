@@ -67,6 +67,6 @@ public class Product extends DomainObject
 		
 		// TODO: Implement profit analysis function
 
-		return profit;
+		return deals.stream().mapToDouble(Deal::getProfitFor).sum();
 	}
 }

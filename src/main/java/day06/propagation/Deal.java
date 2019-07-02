@@ -52,4 +52,8 @@ class Deal extends DomainObject
 	    events.add(event);
 	    event.setDeal(this);
 	}
+
+	public double getProfitFor() {
+		return events.stream().mapToDouble(Event::getProfit).sum();
+	}
 }

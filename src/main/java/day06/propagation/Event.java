@@ -3,61 +3,101 @@ package day06.propagation;
 import java.util.ArrayList;
 import java.util.List;
 
-class Event extends DomainObject
-{
-	private static ObjectManager manager = new ObjectManager();	
-	public static ObjectManager getManager() { return manager; }	
+class Event extends DomainObject {
+    private static ObjectManager manager = new ObjectManager();
 
-	private String comments;
-	private String date;
-	private String mainAction;
-	private String mainIssue;
-	
-	private Deal deal;
-	private Travel travel;
-	private List<Order> orders = new ArrayList<Order>();
+    public static ObjectManager getManager() {
+        return manager;
+    }
 
-	public Event(String comments, String date, String mainAction, 
-			String mainIssue)
-	{
-		manager.addObject(this);
+    private String comments;
+    private String date;
+    private String mainAction;
+    private String mainIssue;
 
-		this.comments = comments;
-		this.date = date;
-		this.mainAction = mainAction;
-		this.mainIssue = mainIssue;
-	}
+    private Deal deal;
+    private Travel travel;
+    private List<Order> orders = new ArrayList<Order>();
 
-	public String getComments() { return comments; }
-	public void setComments(String comments) { this.comments = comments; }
+    public Event(String comments, String date, String mainAction,
+                 String mainIssue) {
+        manager.addObject(this);
 
-	public String getDate() { return date;}
-	public void setDate(String date) { this.date = date;}
+        this.comments = comments;
+        this.date = date;
+        this.mainAction = mainAction;
+        this.mainIssue = mainIssue;
+    }
 
-	public String getMainAction() { return mainAction; }
-	public void setMainAction(String mainAction) { this.mainAction = mainAction; }
+    public String getComments() {
+        return comments;
+    }
 
-	public String getMainIssue() { return mainIssue; }
-	public void setMainIssue(String mainIssue) { this.mainIssue = mainIssue; }
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
-    public Deal getDeal() { return deal; }
-    public void setDeal(Deal deal) { this.deal = deal; }
+    public String getDate() {
+        return date;
+    }
 
-	public double getCost()
-	{
-		return 0;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public Travel getTravel() { return travel; }
-	public void setTravel(Travel tr) {travel = tr;}
+    public String getMainAction() {
+        return mainAction;
+    }
 
-	public List<Order> getOrders() { return orders; }
+    public void setMainAction(String mainAction) {
+        this.mainAction = mainAction;
+    }
 
-	public void addOrder(Order order)
-	{
-		orders.add(order);
-		order.setEvent(this);
-	}
+    public String getMainIssue() {
+        return mainIssue;
+    }
 
-	public void removeOrder(Order order) { orders.remove(order); }
+    public void setMainIssue(String mainIssue) {
+        this.mainIssue = mainIssue;
+    }
+
+    public Deal getDeal() {
+        return deal;
+    }
+
+    public void setDeal(Deal deal) {
+        this.deal = deal;
+    }
+
+    public double getCost() {
+        return 0;
+    }
+
+    public Travel getTravel() {
+        return travel;
+    }
+
+    public void setTravel(Travel tr) {
+        travel = tr;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setEvent(this);
+    }
+
+    public void removeOrder(Order order) {
+        orders.remove(order);
+    }
+
+    public double getProfit() {
+        return orders.stream().mapToDouble(o -> o.getPrice() * o.getQuantity())
+                .sum()
+                - getCost()
+                - ((getTravel() != null) ? getTravel().getCost() : 0.0);
+    }
 }
