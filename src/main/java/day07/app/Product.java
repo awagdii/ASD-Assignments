@@ -1,9 +1,12 @@
-package day06.propagation;
+package day07.app;
+
+import day07.visitors.Visitor;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Product extends DomainObject
 {
@@ -60,12 +63,9 @@ public class Product extends DomainObject
 
 		return priceRange;
 	}
-
-	public double getProfitFor()
+	
+	public void acceptVisitor(Visitor visitor)
 	{
-
-		// TODO: Implement profit analysis function
-
-		return deals.stream().mapToDouble(Deal::getProfitFor).sum();
+		visitor.execute(this);
 	}
 }
