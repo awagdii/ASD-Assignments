@@ -36,7 +36,7 @@ public class Application
 			travelVisitor.execute(s);
 			
 			System.out.println(s.getName());
-			System.out.printf("%-20s profit: %8.5f\n", s.getName(), travelVisitor.getState());
+			System.out.printf("%-20s Travel Cost is: %8.5f\n", s.getName(), travelVisitor.getState());
 
 			// TODO: Print out travels (Extra Credit)
 			
