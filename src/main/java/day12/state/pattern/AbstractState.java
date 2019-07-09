@@ -1,8 +1,8 @@
-package day12;
+package day12.state.pattern;
 
-import day12.utils.Fan;
-import day12.utils.Indicator;
-import day12.utils.Lamp;
+import day12.state.pattern.utils.Fan;
+import day12.state.pattern.utils.Indicator;
+import day12.state.pattern.utils.Lamp;
 
 abstract class AbstractState {
     private StatesContext context;

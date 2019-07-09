@@ -1,4 +1,4 @@
-package day12;
+package day12.state.pattern;
 
 
 public class StatesContext {

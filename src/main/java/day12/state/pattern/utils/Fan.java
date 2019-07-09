@@ -1,4 +1,4 @@
-package day12.utils;
+package day12.state.pattern.utils;
 
 public class Fan {
 
